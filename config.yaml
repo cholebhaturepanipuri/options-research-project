@@ -1,0 +1,32 @@
+# Project-wide configuration
+# Reference this file in notebooks and scripts via:
+#   import yaml
+#   with open("config.yaml") as f:
+#       cfg = yaml.safe_load(f)
+
+market:
+  index         : NIFTY
+  lot_size      : 75           # verify current value from nseindia.com
+  risk_free_rate: 0.065        # RBI repo rate proxy — update quarterly
+  trading_days  : 252
+
+data:
+  raw_dir       : data/raw
+  processed_dir : data/processed
+  sample_dir    : data/sample
+  spot_file     : data/processed/nifty_spot.csv
+  options_file  : data/processed/nifty_options.csv
+  vix_file      : data/processed/india_vix.csv
+
+volatility:
+  rv_windows    : [5, 10, 20, 30]   # rolling windows for RV in trading days
+  default_window: 20
+
+backtest:
+  stop_loss_multipliers : [1.5, 2.0]
+  target_captures       : [0.5, null]  # null = no target exit
+  otm_distances         : [100, 200]   # for strangle
+  cost_per_lot_per_leg  : 50           # ₹, adjust for your broker
+
+dashboard:
+  port: 8501
