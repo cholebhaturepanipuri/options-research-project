@@ -56,7 +56,7 @@ def compute_metrics(
 
     # Profit factor
     gains  = pnl[pnl > 0].sum()
-    losses = pnl[pnl < 0].sum().abs()
+    losses = abs(pnl[pnl < 0].sum())
     profit_factor = float(gains / losses) if losses > 0 else float("inf")
 
     best_trade  = float(pnl.max())
